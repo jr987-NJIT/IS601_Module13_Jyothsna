@@ -93,7 +93,9 @@ class TestUserEndpoints:
         }
         response = client.post("/users/login", json=login_data)
         assert response.status_code == 200
-        assert response.json()["message"] == "Login successful"
+        data = response.json()
+        assert "access_token" in data
+        assert data["token_type"] == "bearer"
         
     def test_login_failure(self):
         """Test login with wrong password."""
