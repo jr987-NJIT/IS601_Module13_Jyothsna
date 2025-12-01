@@ -1,5 +1,6 @@
 """FastAPI application with user management endpoints."""
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from app.database import init_db
 from app.routers import users, calculations
 
@@ -9,6 +10,8 @@ app = FastAPI(
     description="A secure FastAPI application with user registration and authentication",
     version="1.0.0"
 )
+
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 app.include_router(users.router)
 app.include_router(calculations.router)

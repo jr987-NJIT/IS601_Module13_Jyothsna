@@ -2,8 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models import User
-from app.schemas import UserCreate, UserRead, UserLogin
+from app.schemas import UserCreate, UserRead, UserLogin, Token
 from app.utils import hash_password, verify_password
+from app.utils.auth import create_access_token
 
 router = APIRouter(
     prefix="/users",
@@ -32,10 +33,10 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
     db.refresh(new_user)
     return new_user
 
-@router.post("/login")
+@router.post("/login", response_model=Token)
 def login_user(user: UserLogin, db: Session = Depends(get_db)):
     """
-    Login a user.
+    Login a user and return a JWT token.
     """
     db_user = db.query(User).filter(User.username == user.username).first()
     if not db_user:
@@ -44,4 +45,5 @@ def login_user(user: UserLogin, db: Session = Depends(get_db)):
     if not verify_password(user.password, db_user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
-    return {"message": "Login successful", "user_id": db_user.id}
+    access_token = create_access_token(data={"sub": db_user.username})
+    return {"access_token": access_token, "token_type": "bearer"}

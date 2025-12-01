@@ -27,6 +27,12 @@ A FastAPI application implementing secure user management with password hashing,
 - **Integration Testing**: Comprehensive integration tests for User and Calculation routes.
 - **CI/CD Maintenance**: Continuous integration and deployment to Docker Hub.
 
+### Module 13 Features (New)
+- **JWT Authentication**: Secure login and registration with JWT tokens.
+- **Front-End Pages**: HTML/JS pages for user registration and login with client-side validation.
+- **Playwright E2E Tests**: End-to-end testing for user flows.
+- **Static Files**: Serving static assets with FastAPI.
+
 ## 📋 Prerequisites
 
 - Python 3.11+
@@ -372,6 +378,33 @@ pytest tests/test_integration.py
     *   Use `GET /calculations/{id}` to view a specific calculation.
     *   Use `PUT /calculations/{id}` to update a calculation.
     *   Use `DELETE /calculations/{id}` to delete a calculation.
+
+## 🖥️ Front-End Access
+
+1.  Start the application:
+    ```bash
+    uvicorn app.main:app --reload
+    ```
+2.  Open your browser:
+    *   **Login**: `http://localhost:8000/static/login.html`
+    *   **Register**: `http://localhost:8000/static/register.html`
+
+## 🎭 Running E2E Tests
+
+To run the Playwright end-to-end tests:
+
+1.  Install Playwright browsers:
+    ```bash
+    playwright install
+    ```
+2.  Ensure the server is running in a separate terminal:
+    ```bash
+    uvicorn app.main:app --reload
+    ```
+3.  Run the tests:
+    ```bash
+    pytest tests/test_e2e.py
+    ```
 
 ## 🐳 Docker Hub Repository
 

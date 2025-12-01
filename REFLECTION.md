@@ -47,6 +47,19 @@ I implemented a comprehensive testing approach:
 - **Constraint Validation**: Ensuring unique constraints work correctly
 - Error Handling: Verifying proper error messages for various scenarios
 
+### Module 13 Reflection
+
+In Module 13, I expanded the application to include JWT-based authentication and a front-end interface, along with End-to-End (E2E) testing using Playwright.
+
+#### Key Experiences
+- **JWT Implementation**: Moving from simple database verification to issuing JWT tokens allows for stateless authentication, which is crucial for modern web applications.
+- **Front-End Integration**: Building the HTML/JS pages provided a tangible interface for the API. Handling asynchronous `fetch` requests and managing token storage in `localStorage` were key learning points.
+- **E2E Testing**: Playwright offered a powerful way to test the application from the user's perspective. Automating browser interactions ensures that the UI works correctly with the backend.
+
+#### Challenges
+- **Testing Asynchronous UI**: Ensuring that tests wait for UI updates (like success messages) required using Playwright's `expect` assertions effectively.
+- **CI/CD Integration**: Configuring GitHub Actions to run a server in the background while executing E2E tests was a new challenge that required understanding background processes in shell scripts.
+
 ### Module 12 Reflection
 
 In Module 12, I focused on completing the back-end logic by implementing User and Calculation routes and ensuring robust integration testing.

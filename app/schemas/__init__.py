@@ -72,6 +72,14 @@ class UserLogin(BaseModel):
     password: str = Field(..., description="Password")
 
 
+class Token(BaseModel):
+    """
+    Schema for JWT token response.
+    """
+    access_token: str
+    token_type: str
+
+
 # Import calculation schemas
 from app.schemas.calculation import (  # noqa: E402
     CalculationCreate,
@@ -85,6 +93,7 @@ __all__ = [
     "UserRead",
     "UserUpdate",
     "UserLogin",
+    "Token",
     "CalculationCreate",
     "CalculationRead",
     "CalculationUpdate",
